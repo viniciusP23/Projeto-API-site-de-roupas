@@ -45,3 +45,33 @@ if(loginForm) {
         }
     })
 }
+
+// Mostrar produtos na página
+
+const PRODUTOS_URL = "http://localhost:3000/produtos"
+const container = document.getElementById("produtosContainer")
+if(container) {
+    async function carregarProduto() {
+        const res = await fetch(PRODUTOS_URL)
+        const produtos = await res.json()
+
+        container.innerHTML = ""
+        produtos.forEach(product => {
+            container.innerHTML += `
+                <div class="card">
+                    <img src=${product.imagem || `'https://via.placeholder.com/200'`}
+                    <h3>${product.nome}</h3>
+                    <p>${product.categoria}</p>
+                    <p><strong>${product.preco}</strong></p>
+                </div>
+            `
+        });
+        
+        
+    }
+
+    
+
+    carregarProduto()
+}
+
