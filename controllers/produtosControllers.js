@@ -4,9 +4,9 @@ const prisma = new PrismaClient()
 
 export const criarProduto = async (req, res) => {
     try {
-        const {nome, preco, imagem, categoria} = req.body
+        const {nome, preco, imagem, categoria, avaliacao} = req.body
         const createProduct = await prisma.produtos.create({
-            data: {nome, preco: parseFloat(preco),  imagem, categoria}
+            data: {nome, preco: parseFloat(preco),  imagem, categoria, avaliacao}
         })
         res.status(201).json(createProduct)
 
@@ -43,10 +43,10 @@ export const listarProdutoID = async (req, res) => {
 export const atualizarProduto = async (req, res) => {
     try {
         const id = req.params.id
-        const {nome, preco, imagem, categoria} = req.body
+        const {nome, preco, imagem, categoria, avaliacao} = req.body
         const uptadeProduct = await prisma.produtos.update({
             where: {id},
-            data: {nome, preco: parseFloat(preco), imagem, categoria}
+            data: {nome, preco: parseFloat(preco), imagem, categoria, avaliacao}
         })
         res.status(201).json(uptadeProduct)
 

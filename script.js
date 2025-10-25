@@ -56,22 +56,55 @@ if(container) {
         const produtos = await res.json()
 
         container.innerHTML = ""
+        
         produtos.forEach(product => {
-            container.innerHTML += `
-                <div class="card">
-                    <img src=${product.imagem || `'https://via.placeholder.com/200'`}
-                    <h3>${product.nome}</h3>
-                    <p>${product.categoria}</p>
-                    <p><strong>${product.preco}</strong></p>
-                </div>
-            `
+            const card = document.createElement("div")
+            card.classList.add("card")
+
+            const img = document.createElement("img")
+            img.src = product.imagem || "https://via.placeholder.com/200"
+
+            const descricoes = document.createElement("div")
+            descricoes.classList.add("descricoes")
+
+            const nome = document.createElement("h3")
+            nome.textContent = product.nome
+
+            const categoria = document.createElement("p")
+            categoria.textContent = product.categoria
+
+            const preco = document.createElement("p")
+            preco.innerHTML = `<strong>${product.preco}</strong>`
+
+            const avaliacao = document.createElement("p")
+            avaliacao.textContent = product.avaliacao
+
+            if(product.nome === "Tênis vermelho") {
+                nome.style.color = "#c74444ff"
+                
+            }
+
+            descricoes.append(nome, categoria, preco, avaliacao)
+            card.append(img, descricoes)
+            container.append(card)
         });
         
-        
     }
-
-    
 
     carregarProduto()
 }
 
+//  produtos.forEach(product => {
+//             container.innerHTML += `
+//                 <div class="card">
+//                     <img src=${product.imagem || `'https://via.placeholder.com/200'`}/>
+                    
+//                     <div class="descricoes">
+//                         <h3>${product.nome}</h3>
+//                         <p>${product.categoria}</p>
+//                         <p><strong>${product.preco}</strong></p>
+//                         <p>${product.avaliacao}</p>
+//                     </div>
+//                 </div>
+//             `
+//         });

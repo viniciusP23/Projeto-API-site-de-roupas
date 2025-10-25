@@ -29,6 +29,7 @@ model Produtos {
   preco     Float
   imagem    String
   categoria String
+  avaliacao String?
   createdAt DateTime @default(now())
 }
 
